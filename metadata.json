@@ -1,0 +1,8 @@
+{
+  "name": "Bodwé Klodynn - Premium Streetwear",
+  "description": "A high-end, urban streetwear brand showcase featuring cinematic visuals, modern typography, and luxury fashion collections.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
