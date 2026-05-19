@@ -3,7 +3,7 @@ import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { IMAGES } from "@/constants";
 
-export function Hero({ onShopClick }: { onShopClick: () => void }) {
+export function Hero({ onShopClick, onWatchFilm }: { onShopClick: () => void, onWatchFilm: () => void }) {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black">
       {/* Background Image with Ken Burns effect */}
@@ -75,7 +75,10 @@ export function Hero({ onShopClick }: { onShopClick: () => void }) {
             <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
           </Button>
           
-          <button className="flex items-center gap-3 text-white/70 hover:text-white transition-colors group">
+          <button 
+            onClick={onWatchFilm}
+            className="flex items-center gap-3 text-white/70 hover:text-white transition-colors group"
+          >
             <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-primary group-hover:bg-primary/10 transition-all">
               <Play size={16} fill="white" className="ml-1" />
             </div>

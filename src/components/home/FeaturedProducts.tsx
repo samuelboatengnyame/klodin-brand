@@ -4,9 +4,7 @@ import { ProductCard } from "@/components/shop/ProductCard";
 
 import { Product } from "@/types";
 
-export function FeaturedProducts({ onAddToCart }: { onAddToCart: (p: Product, s: string) => void }) {
-  const featured = PRODUCTS.filter(p => p.featured);
-
+export function FeaturedProducts({ products, onAddToCart }: { products: Product[], onAddToCart: (p: Product, s: string) => void }) {
   return (
     <section id="shop" className="py-32 bg-background relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
@@ -42,7 +40,7 @@ export function FeaturedProducts({ onAddToCart }: { onAddToCart: (p: Product, s:
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10">
-          {featured.map((product, index) => (
+          {products.map((product, index) => (
             <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 30 }}
@@ -50,7 +48,9 @@ export function FeaturedProducts({ onAddToCart }: { onAddToCart: (p: Product, s:
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <ProductCard product={product} onAddToCart={(p, s) => onAddToCart(p, s)} />
+              <div key={product.id}>
+                 <ProductCard product={product} onAddToCart={(p, s) => onAddToCart(p, s)} />
+              </div>
             </motion.div>
           ))}
         </div>

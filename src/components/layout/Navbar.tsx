@@ -4,9 +4,20 @@ import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { BRAND_NAME } from "@/constants";
 
-export function Navbar({ onOpenCart, cartCount }: { onOpenCart: () => void, cartCount: number }) {
+export function Navbar({ 
+  onOpenCart, 
+  cartCount,
+  searchQuery,
+  onSearchChange
+}: { 
+  onOpenCart: () => void, 
+  cartCount: number,
+  searchQuery: string,
+  onSearchChange: (val: string) => void
+}) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,16 +32,18 @@ export function Navbar({ onOpenCart, cartCount }: { onOpenCart: () => void, cart
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "glass py-4" : "bg-transparent py-6"}`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <button 
-          className="lg:hidden text-white hover:text-primary transition-colors"
-          onClick={() => setIsMobileMenuOpen(true)}
-        >
-          <Menu size={24} />
-        </button>
-          
-        <a href="/" className="text-2xl font-black italic tracking-tighter uppercase group">
-          BODWÉ <span className="text-primary transition-colors group-hover:text-white">KLODYNN</span>
-        </a>
+        <div className="flex items-center gap-4">
+          <button 
+            className="lg:hidden text-white hover:text-primary transition-colors"
+            onClick={() => setIsMobileMenuOpen(true)}
+          >
+            <Menu size={24} />
+          </button>
+            
+          <a href="/" className="text-2xl font-black italic tracking-tighter uppercase group">
+            BODWÉ <span className="text-primary transition-colors group-hover:text-white">KLODYNN</span>
+          </a>
+        </div>
 
         <div className="hidden lg:flex items-center gap-12 text-[10px] uppercase tracking-[0.3em] font-medium opacity-70">
           <a href="#collections" className="hover:text-primary hover:opacity-100 transition-all">Collection</a>
@@ -40,10 +53,28 @@ export function Navbar({ onOpenCart, cartCount }: { onOpenCart: () => void, cart
         </div>
 
         <div className="flex items-center gap-4 lg:gap-6">
-
-          <button className="hidden sm:block text-white hover:text-primary transition-colors">
-            <Search size={20} />
-          </button>
+          <div className="relative hidden sm:flex items-center">
+            <AnimatePresence>
+              {isSearchOpen && (
+                <motion.input
+                  initial={{ width: 0, opacity: 0 }}
+                  animate={{ width: 200, opacity: 1 }}
+                  exit={{ width: 0, opacity: 0 }}
+                  value={searchQuery}
+                  onChange={(e) => onSearchChange(e.target.value)}
+                  placeholder="SEARCH..."
+                  className="bg-white/5 border border-white/10 rounded-none px-4 py-1 text-[10px] uppercase tracking-widest focus:outline-none focus:border-primary/50 mr-4"
+                  autoFocus
+                />
+              )}
+            </AnimatePresence>
+            <button 
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              className="text-white hover:text-primary transition-colors"
+            >
+              {isSearchOpen ? <X size={18} /> : <Search size={20} />}
+            </button>
+          </div>
           <button className="text-white hover:text-primary transition-colors">
             <Heart size={20} />
           </button>

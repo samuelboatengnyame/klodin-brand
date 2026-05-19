@@ -11,9 +11,10 @@ interface CartDrawerProps {
   items: CartItem[];
   onUpdateQuantity: (id: string, size: string, q: number) => void;
   onRemove: (id: string, size: string) => void;
+  onPlaceOrder: () => void;
 }
 
-export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemove }: CartDrawerProps) {
+export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemove, onPlaceOrder }: CartDrawerProps) {
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
@@ -63,7 +64,7 @@ export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemove 
                       <div className="flex-1 flex flex-col">
                         <div className="flex justify-between mb-1">
                           <h3 className="font-bold text-sm uppercase tracking-tight">{item.name}</h3>
-                          <p className="font-bold text-primary">${item.price}</p>
+                          <p className="font-bold text-primary">GH₵{item.price}</p>
                         </div>
                         <p className="text-xs text-muted-foreground uppercase tracking-widest mb-4">Size: {item.selectedSize}</p>
                         
@@ -102,15 +103,18 @@ export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemove 
               <div className="p-6 border-t border-white/5 bg-zinc-900/50">
                 <div className="flex justify-between mb-2">
                   <span className="text-muted-foreground text-sm uppercase tracking-widest">Subtotal</span>
-                  <span className="font-bold text-lg">${subtotal}</span>
+                  <span className="font-bold text-lg">GH₵{subtotal}</span>
                 </div>
                 <div className="flex justify-between mb-6">
                   <span className="text-muted-foreground text-sm uppercase tracking-widest">Shipping</span>
                   <span className="text-xs uppercase font-bold text-primary">Free for members</span>
                 </div>
                 <Separator className="bg-white/5 mb-6" />
-                <Button className="w-full h-14 text-sm uppercase tracking-[0.2em] font-bold">
-                  Checkout Now
+                <Button 
+                  className="w-full h-14 text-sm uppercase tracking-[0.2em] font-bold"
+                  onClick={onPlaceOrder}
+                >
+                  Place Order
                 </Button>
                 <button className="w-full text-center mt-4 text-[10px] uppercase tracking-widest text-muted-foreground hover:text-white transition-colors" onClick={onClose}>
                   Continue Shopping

@@ -3,7 +3,7 @@ import { Instagram, Twitter, Facebook, ArrowUp, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-export function Footer() {
+export function Footer({ onOpenAdmin }: { onOpenAdmin: () => void }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -25,17 +25,17 @@ export function Footer() {
           
           <div className="lg:col-span-4">
             <p className="text-muted-foreground text-sm mb-10 max-w-sm leading-loose">
-              Premium length engineered for the modern nomad. Bodwé Klodynn defines the intersection of high-street silhouette and bespoke luxury hardware. Studio based in Paris / Tokyo.
+              Premium length engineered for the modern nomad. Bodwé Klodynn defines the intersection of high-street silhouette and bespoke luxury hardware. Studio based in Ghana.
             </p>
           </div>
 
           <div className="lg:col-span-2">
             <h3 className="text-white/30 text-[8px] uppercase tracking-[0.2em] font-bold mb-6">Collections</h3>
             <ul className="flex flex-col gap-4 text-[10px] uppercase font-bold tracking-widest">
-              <li><a href="#" className="hover:text-primary transition-colors">Archive 01</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Bespoke</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Lookbook</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Collaborations</a></li>
+              <li><a href="#collections" className="hover:text-primary transition-colors">Archive 01</a></li>
+              <li><a href="#collections" className="hover:text-primary transition-colors">Bespoke</a></li>
+              <li><a href="#lookbook" className="hover:text-primary transition-colors">Lookbook</a></li>
+              <li><button onClick={onOpenAdmin} className="text-left hover:text-primary transition-colors">Admin Settings</button></li>
             </ul>
           </div>
 
@@ -45,8 +45,8 @@ export function Footer() {
             <ul className="flex flex-col gap-4 text-muted-foreground font-medium">
               <li><a href="#" className="hover:text-primary transition-colors">Shipping</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Returns</a></li>
+              <li><button onClick={onOpenAdmin} className="text-left hover:text-primary transition-colors">Manage Pricing</button></li>
               <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">FAQ</a></li>
             </ul>
           </div>
 

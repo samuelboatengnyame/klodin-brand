@@ -5,9 +5,8 @@ import { ProductCard } from "@/components/shop/ProductCard";
 import { Product } from "@/types";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
-export function NewArrivals({ onAddToCart }: { onAddToCart: (p: Product, s: string) => void }) {
+export function NewArrivals({ products, onAddToCart }: { products: Product[], onAddToCart: (p: Product, s: string) => void }) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const newItems = PRODUCTS.slice(0, 5); // Just taking first 5 as "new" for now
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -51,7 +50,7 @@ export function NewArrivals({ onAddToCart }: { onAddToCart: (p: Product, s: stri
         ref={scrollRef}
         className="flex gap-8 overflow-x-auto px-[max(1.5rem,calc((100vw-80rem)/2))] pb-12 no-scrollbar snap-x snap-mandatory"
       >
-        {newItems.map((product, index) => (
+        {products.map((product, index) => (
           <motion.div
             key={product.id}
             initial={{ opacity: 0, y: 50 }}

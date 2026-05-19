@@ -43,7 +43,7 @@ export function ProductCard({ product, onAddToCart }: { product: Product, onAddT
                 <div className="p-8 flex flex-col">
                   <Badge className="w-fit mb-4 bg-primary text-primary-foreground rounded-none uppercase font-bold tracking-widest">{product.category}</Badge>
                   <h2 className="text-4xl font-bold uppercase tracking-tighter mb-2">{product.name}</h2>
-                  <p className="text-2xl font-bold text-primary mb-6">${product.price}</p>
+                  <p className="text-2xl font-bold text-primary mb-6">GH₵{product.price}</p>
                   <p className="text-muted-foreground mb-8 leading-relaxed">{product.description}</p>
                   
                   <div className="mb-8">
@@ -89,12 +89,22 @@ export function ProductCard({ product, onAddToCart }: { product: Product, onAddT
         </button>
       </div>
 
-      <div className="mt-6">
-        <div className="flex justify-between items-start mb-1">
-          <p className="text-muted-foreground text-[10px] uppercase tracking-[0.2em] font-medium">{product.category}</p>
-          <p className="font-mono text-xs font-medium text-primary">${product.price.toFixed(2)}</p>
+      <div className="mt-6 flex flex-col gap-4">
+        <div>
+          <div className="flex justify-between items-start mb-1">
+            <p className="text-muted-foreground text-[10px] uppercase tracking-[0.2em] font-medium">{product.category}</p>
+            <p className="font-mono text-xs font-medium text-primary">GH₵{product.price.toFixed(2)}</p>
+          </div>
+          <h3 className="text-xl font-bold tracking-tight uppercase group-hover:text-primary transition-colors">{product.name}</h3>
         </div>
-        <h3 className="text-xl font-bold tracking-tight uppercase group-hover:text-primary transition-colors">{product.name}</h3>
+        
+        <Button 
+          variant="outline" 
+          className="rounded-none border-white/10 hover:border-primary hover:bg-primary hover:text-black uppercase tracking-[0.2em] text-[10px] font-bold h-10 w-full transition-all duration-300"
+          onClick={() => onAddToCart?.(product, selectedSize)}
+        >
+          Order Now
+        </Button>
       </div>
     </motion.div>
   );

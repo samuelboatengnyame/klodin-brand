@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { IMAGES } from "@/constants";
 import { ArrowUpRight } from "lucide-react";
 
-export function Lookbook() {
+export function Lookbook({ onWatchFilm }: { onWatchFilm: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -54,7 +54,10 @@ export function Lookbook() {
                 Our first chapter explores the duality of modern existence. The contrast between raw concrete textures and the refined luxury of gold leaf. Designed in the heart of the city, for those who move between shadows.
               </p>
               
-              <button className="flex items-center gap-4 text-white font-bold uppercase tracking-widest group">
+              <button 
+                onClick={onWatchFilm}
+                className="flex items-center gap-4 text-white font-bold uppercase tracking-widest group"
+              >
                 Explored the Lookbook
                 <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-primary group-hover:bg-primary group-hover:text-black transition-all">
                   <ArrowUpRight size={20} />
